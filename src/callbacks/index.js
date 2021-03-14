@@ -1,13 +1,26 @@
 const starshipsRequest = new XMLHttpRequest()
 starshipsRequest.addEventListener('load', function () {
-  const starshipsArray = JSON.parse(this.response).results
+  const starshipResponse = JSON.parse(this.response)
+  console.log(starshipResponse)
+  const starshipsArray = starshipResponse.results
   const starshipsDiv = document.getElementById('starships')
   starshipsDiv.innerHTML = `
-    <ul>
-      ${starshipsArray.map(starship => `
-        <li>${starship.name}</li>
-      `).join('')}
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Starship Name</th>
+          <th>Cost in Credits</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${starshipsArray.map(starship => `
+          <tr>
+            <td>${starship.name}</td>
+            <td>${starship.cost_in_credits}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
   `
 })
 starshipsRequest.open('GET', 'https://swapi.dev/api/starships/')
