@@ -1,7 +1,6 @@
 const starshipsRequest = new XMLHttpRequest()
 starshipsRequest.addEventListener('load', function () {
   const starshipResponse = JSON.parse(this.response)
-  console.log(starshipResponse)
   const starshipsArray = starshipResponse.results
   const starshipsDiv = document.getElementById('starships')
   starshipsDiv.innerHTML = `

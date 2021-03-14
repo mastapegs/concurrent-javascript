@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:callbacks": "http-server src/callbacks",
-    "start:promises": "http-server src/callbacks",
-    "start:asyncawait": "http-server src/callbacks"
+    "start:promises": "http-server src/promises",
+    "start:asyncawait": "http-server src/async-await"
   }
 }
