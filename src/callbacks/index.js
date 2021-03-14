@@ -12,6 +12,7 @@ starshipsRequest.addEventListener('load', function () {
           <th>Manufacturer</th>
           <th>Cost in Credits</th>
           <th>Crew</th>
+          <th>Appeared In</th>
         </tr>
       </thead>
       <tbody>
@@ -22,11 +23,31 @@ starshipsRequest.addEventListener('load', function () {
             <td>${starship.manufacturer}</td>
             <td>${starship.cost_in_credits}</td>
             <td>${starship.crew}</td>
+            <td data-movies=${JSON.stringify(starship.films)} class="appearedIn"></td>
           </tr>
         `).join('')}
       </tbody>
     </table>
   `
+  const appearedInArray = document.querySelectorAll('.appearedIn')
+  appearedInArray.forEach(starshipTD => {
+    const movieURLs = JSON.parse(starshipTD.dataset.movies)
+    const movieNames = []
+    let movieNamesCompletedRequests = 0
+    for (let i = 0; i < movieURLs.length; i++) {
+      const movieNameRequest = new XMLHttpRequest()
+      movieNameRequest.addEventListener('load', function() {
+        const movieNameResponse = JSON.parse(this.response)
+        movieNames.push(movieNameResponse.title)
+        movieNamesCompletedRequests++
+        if (movieNamesCompletedRequests === movieURLs.length) {
+          starshipTD.innerHTML = movieNames.join()
+        }
+      })
+      movieNameRequest.open('GET', movieURLs[i])
+      movieNameRequest.send()
+    }
+  })
 })
 starshipsRequest.open('GET', 'https://swapi.dev/api/starships/')
 starshipsRequest.send()
