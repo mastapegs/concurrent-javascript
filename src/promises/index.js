@@ -32,9 +32,8 @@ fetch('https://swapi.dev/api/starships/')
     const appearedInTDArray = document.querySelectorAll('.appearedIn')
     appearedInTDArray.forEach(starshipTD => {
       const movieURLs = JSON.parse(starshipTD.dataset.movies)
-      const movieNamePromises = movieURLs.map(movieURL => {
-        return fetch(movieURL).then(res => res.json()).then(movieData => movieData.title)
-      })
+      const movieNamePromises = movieURLs
+        .map(movieURL => fetch(movieURL).then(res => res.json()).then(movieData => movieData.title))
       Promise.all(movieNamePromises)
         .then(movieNames => {
           starshipTD.innerHTML = movieNames.join()
