@@ -9,14 +9,20 @@ starshipsRequest.addEventListener('load', function () {
       <thead>
         <tr>
           <th>Starship Name</th>
+          <th>Model</th>
+          <th>Manufacturer</th>
           <th>Cost in Credits</th>
+          <th>Crew</th>
         </tr>
       </thead>
       <tbody>
         ${starshipsArray.map(starship => `
           <tr>
             <td>${starship.name}</td>
+            <td>${starship.model}</td>
+            <td>${starship.manufacturer}</td>
             <td>${starship.cost_in_credits}</td>
+            <td>${starship.crew}</td>
           </tr>
         `).join('')}
       </tbody>
