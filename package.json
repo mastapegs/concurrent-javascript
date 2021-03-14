@@ -1,0 +1,14 @@
+{
+  "name": "code-sandbox",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "scripts": {
+    "start:callbacks": "http-server src/callbacks",
+    "start:promises": "http-server src/callbacks",
+    "start:asyncawait": "http-server src/callbacks"
+  }
+}
